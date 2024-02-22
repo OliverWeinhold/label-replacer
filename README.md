@@ -7,6 +7,7 @@ The Label Replacer is a simple WordPress plugin designed to automatically replac
 - Automatically replace labels within your text.
 - Define labels anywhere on the page
 - Also works with embedded content and plugins (e.g. Insert Pages Plugin)
+- Allow usage of WP HTML elements within labels (e.g. Links)
 
 ## Installation
 
@@ -38,6 +39,13 @@ The Label Replacer is a simple WordPress plugin designed to automatically replac
    This Guide is for Device Version v1.0.
    ``` 
  
+## Configuration
+The settings page can be found under the WordPress settings.
+
+**Allow HTML:** Allows the use of HTML elements such as links within the labels. 
+> [!WARNING]
+> This setting should only be used if the admins and authors are aware of the risks when using HTML elements!
+
 ## License
 
 This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html).

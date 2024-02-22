@@ -3,7 +3,7 @@
 Plugin Name: Label Replacer
 Plugin URI: https://oliverweinhold.de/
 Description: A simple plugin to replace specific text labels on the website automatically.
-Version: 1.0
+Version: 1.1
 Author: Oliver Weinhold
 Author URI: https://oliverweinhold.de/
 License: GPL v3 or later
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 /*
 Label Replacer WordPress Plugin
-Copyright (C) 2023 Oliver Weinhold
+Copyright (C) 2024 Oliver Weinhold
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,6 +27,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.html.
 */
+
+// Include Settings page
+include 'settings.php';
 
 function replace_labels($content) {
     // Regex to find label definitions.
@@ -46,7 +49,11 @@ function replace_labels($content) {
         // Check if the necessary data is present.
         if (isset($match[1]) && isset($match[2])) {
             $label = esc_html($match[1]);  // Data cleaning
-            $replacement = sanitize_text_field($match[2]);  // Data validation
+            if (get_option('labelReplacer_allowHTML')) { //get Setting allowHTML
+                $replacement = $match[2];  // No Data validation if allowHTML is enabled
+            } else {
+                $replacement = sanitize_text_field($match[2]);  // Data validation  
+            }
             $labels['{{label:' . preg_quote($label, '/') . '}}'] = $replacement;
 
             // Remove the label definition from the content.
